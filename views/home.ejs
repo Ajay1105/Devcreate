@@ -1,0 +1,8 @@
+<%- include('partials/header'); -%>
+<h1>Home</h1>
+<p> <%=homeText%> </p>
+<% inputData.forEach((inputData)=>{ %>
+<h1> <%= inputData.title %> </h1>
+<p> <%= inputData.story %> </p>
+<% }) %>
+<%- include('partials/footer'); -%>
