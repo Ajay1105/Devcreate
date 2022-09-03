@@ -9,12 +9,12 @@ app.set('view engine', 'ejs');
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+require('dotenv').config();
+//const uri =  "mongodb+srv://aky11052003:Engineering@cluster0.axglx.mongodb.net/DevCreate?retryWrites=true&w=majority";
 
-const uri =
-  "mongodb+srv://aky11052003:Engineering@cluster0.axglx.mongodb.net/DevCreate?retryWrites=true&w=majority";
 try {
   mongoose.connect(
-    uri,
+    process.env.URI,
     { useNewUrlParser: true, useUnifiedTopology: true },
     () => console.log("Mongoose is connected")
   );
@@ -138,7 +138,6 @@ app.get('/stories',(req,res)=>{
     var post = [];
     Story.find((err,result)=>{
           post =result;
-          console.log(post);
           res.render('home', { homeText: "homeStartingContent", inputData: post });
         });
 });
@@ -155,9 +154,45 @@ app.post('/compose',(req,res)=>{
 });
 
 // complaints
+const complaintSchema = new mongoose.Schema({
+    name: String,
+    phoneNumber: String,
+    victimName: String,
+    victimAddress: String,
+    complaint: String
+  });
+  const Complaint = new mongoose.model("Complaint", complaintSchema);
 
+app.get('/complaint',(req,res)=>{
+    res.sendFile(__dirname + "/complaint.html");
+});
 
+app.post('/complaint',(req,res)=>{
+ const name = req.body.name;
+ const phoneNumber = req.body.phoneNumber;
+ const victimName = req.body.victimName;
+ const victimAddress = req.body.victimAddress;
+ const complaint = req.body.complaint;
 
+ const data = new Complaint({
+    name: name,
+    phoneNumber: phoneNumber,
+    victimName: victimName,
+    victimAddress: victimAddress,
+    complaint: complaint
+  });
+  data.save();
+  res.send("sucessful");
+});
+
+//complaint display
+app.get('/complaintdisplay',(req,res)=>{
+    var post = [];
+    Complaint.find((err,result)=>{
+          post =result;
+          res.render('complaintDisplay', { inputData: post });
+        });
+});
 
 app.listen(3000, function () {
   console.log("i am a server");

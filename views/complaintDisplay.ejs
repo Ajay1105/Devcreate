@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Daily Journal</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+
+<body>
+    
+    <div class="container">
+
+   
+
+
+
+
+        <h1>Complaints</h1>
+        <% inputData.forEach((inputData)=>{ %>
+        <h1> <%= inputData.name %> </h1>
+        <p> <%= inputData.phoneNumber %> </p>
+        <p> <%= inputData.victimName %> </p>
+        <p> <%= inputData.victimAddress %> </p>
+        <p> <%= inputData.complaint %> </p>
+        <% }) %>
+
+
+
+
+
+
+
+    </div>
+    <div class =" footer-padding"></div>
+    </div>
+    </body>
+    </html>
