@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complaint</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="complaint.css">
 </head>
 <body>
-    <form action="/complaint" method="post">
-        <input type="text" name = "name" placeholder="Enter name">
-        <input type="text" name = "phoneNumber" placeholder="Enter phoneNumber">
-        <input type="text" name = "victimName" placeholder="Enter victimName">
-        <input type="text" name = "victimAddress" placeholder="Enter victimAddress">
-        <input type="text" name = "complaint" placeholder="Enter complaint">
-        <button type="submit">Go</button>
-     </form>
+    <div class="container">
+        <form action="/complaint" method="post">
+      
+          <label for="fname"> Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name.." required>
+      
+          <label for="phoneNumber">Phone N</label>
+          <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Entre your Number" required>
+          <label for="full-name">Victim Name</label>
+          <input type="text" name="victimName" id="victimname" placeholder="Victim Name" required="">
+          <label for="victimAddress">victim Address</label>
+         <textarea name="3" name="victimAddress" id="address" cols="10" rows="5"></textarea>
+      
+          <label for="complaint">Complaint</label>
+          <textarea id="complaint" name="complaint" placeholder="Write something.." style="height:200px"></textarea >
+      
+          <input type="submit" value="Submit">
+      
+        </form>
+      </div>
 </body>
 </html>

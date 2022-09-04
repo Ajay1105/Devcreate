@@ -1,8 +1,43 @@
-<%- include('partials/header'); -%>
-<h1>Home</h1>
-<p> <%=homeText%> </p>
-<% inputData.forEach((inputData)=>{ %>
-<h1> <%= inputData.title %> </h1>
-<p> <%= inputData.story %> </p>
-<% }) %>
-<%- include('partials/footer'); -%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Daily Journal</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="storiesstyle.css">
+    
+
+<body>
+    
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">Story</div>
+            <div class="buttons">
+                <form action="/compose" method="get">
+                <button class="btn"> Write Story</button>
+            </form>
+                <button class="btn"><a href="/complaint">Write Complaint</a></button>
+                <form action="/complaintdisplay" method="get">
+                <button class="btn">View Complaint</button>
+            </form>
+            </div>
+        </div>
+        <div class="mainarea">
+            <% inputData.forEach((inputData)=>{ %>
+            <div class="card">
+                
+                <div class="title"><%= inputData.title %></div>
+                <div class="story"> <%= inputData.story %></div>
+            </div>
+            <% }) %>
+        </div>
+       
+ 
+
+</div>
+<div class =" footer-padding"></div>
+</div>
+</body>
+</html>

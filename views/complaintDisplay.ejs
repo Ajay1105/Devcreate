@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -37,4 +37,53 @@
     <div class =" footer-padding"></div>
     </div>
     </body>
-    </html>
+    </html> -->
+
+
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Daily Journal</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="complaintstyle.css">
+    
+
+<body>
+    
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">Complaint</div>
+            <div class="buttons">
+                <form action="/compose" method="get">
+                    <button class="btn"> Write Story</button>
+                </form>
+                    <button class="btn"><a href="/complaint">Write Complaint</a></button>
+                    <form action="/complaintdisplay" method="get">
+                    <button class="btn">View Complaint</button>
+                </form>
+            </div>
+        </div>
+        <div class="mainarea">
+            <% inputData.forEach((inputData)=>{ %>
+            <div class="card">
+                
+
+                
+                <h1> <%= inputData.name %> </h1>
+                <p> <%= inputData.phoneNumber %> </p>
+                <p> <%= inputData.victimName %> </p>
+                <p> <%= inputData.victimAddress %> </p>
+                <p> <%= inputData.complaint %> </p>
+                <% }) %>
+        </div>
+       
+ 
+
+</div>
+<div class =" footer-padding"></div>
+</div>
+</body>
+</html>

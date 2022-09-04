@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 const { response } = require("express");
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -10,6 +11,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 require('dotenv').config();
+var jwt = require('jsonwebtoken');
+app.use(cookieParser());
 //const uri =  "mongodb+srv://aky11052003:Engineering@cluster0.axglx.mongodb.net/DevCreate?retryWrites=true&w=majority";
 
 try {
@@ -22,6 +25,36 @@ try {
   console.log("could not connect");
 }
 
+//cookie auth
+const authorization = (req, res, next) => {
+  const token = req.cookies.access_token;
+  if (!token) {
+    return res.sendStatus(403);
+  }
+  try {
+    const data = jwt.verify(token, process.env.SECRET_KEY);
+    req.userId = data.id;
+    return next();
+  } catch {
+    return res.sendStatus(403);
+  }
+};
+
+const nauthorization = (req, res, next) => {
+  const ntoken = req.cookies.naccess_token;
+  if (!ntoken) {
+    return res.sendStatus(403);
+  }
+  try {
+    const data = jwt.verify(ntoken, process.env.SECRET_KEY);
+    req.userId = data.id;
+    return next();
+  } catch {
+    return res.sendStatus(403);
+  }
+};
+
+
 // normal user login
 const userSchema = new mongoose.Schema({
   email: String,
@@ -30,7 +63,7 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("User", userSchema);
 
 app.get("/", (req, res) => {
-  res.send("home");
+  res.sendFile(__dirname + "/home.html");
 });
 
 app.get("/register", (req, res) => {
@@ -65,7 +98,17 @@ app.post("/login", (req, res) => {
       bcrypt.compare(password, data.password, function (err, result) {
         if (result == true) {
           s = 0;
-          res.send("/secrets");
+          try{
+          const token = jwt.sign({ id: data.email }, process.env.SECRET_KEY);
+          return res
+            .cookie("access_token", token, {
+              httpOnly: true,
+            })
+            .status(200)
+            .redirect('/stories')
+          }catch(err){
+            res.send(err);
+          }
         } else {
           res.send("Email and Password does not match!");
         }
@@ -73,6 +116,16 @@ app.post("/login", (req, res) => {
     }
   });
 });
+
+app.get("/logout", authorization, (req, res) => {
+  return res
+    .clearCookie("access_token")
+    .status(200)
+    .json({ message: "Successfully logged out 😏 🍀" });
+});
+
+
+
 
 //NGO Login
 const ngoSchema = new mongoose.Schema({
@@ -113,7 +166,17 @@ const ngoSchema = new mongoose.Schema({
         bcrypt.compare(password, data.password, function (err, result) {
           if (result == true) {
             s = 0;
-            res.send("/secrets");
+            try{
+              const ntoken = jwt.sign({ id: data.email }, process.env.SECRET_KEY);
+              return res
+                .cookie("naccess_token", ntoken, {
+                  httpOnly: true,
+                })
+                .status(200)
+                .json({ message: "Logged in successfully" });
+              }catch(err){
+                res.send(err);
+              }
           } else {
             res.send("Email and Password does not match!");
           }
@@ -121,6 +184,15 @@ const ngoSchema = new mongoose.Schema({
       }
     });
   });
+app.get("/nlogout", authorization, (req, res) => {
+    return res
+      .clearCookie("naccess_token")
+      .status(200)
+      .json({ message: "Successfully logged out 😏 🍀" });
+  });
+
+
+
 
 // stories
 
@@ -130,7 +202,7 @@ const storySchema = new mongoose.Schema({
   });
   const Story = new mongoose.model("Story", storySchema);
 
-app.get('/compose',(req,res)=>{
+app.get('/compose',authorization,(req,res)=>{
     res.render('compose');
 });
 
@@ -138,7 +210,7 @@ app.get('/stories',(req,res)=>{
     var post = [];
     Story.find((err,result)=>{
           post =result;
-          res.render('home', { homeText: "homeStartingContent", inputData: post });
+          res.render('home', {  inputData: post });
         });
 });
 
@@ -182,11 +254,11 @@ app.post('/complaint',(req,res)=>{
     complaint: complaint
   });
   data.save();
-  res.send("sucessful");
+  res.send("success");
 });
 
 //complaint display
-app.get('/complaintdisplay',(req,res)=>{
+app.get('/complaintdisplay',nauthorization,(req,res)=>{
     var post = [];
     Complaint.find((err,result)=>{
           post =result;

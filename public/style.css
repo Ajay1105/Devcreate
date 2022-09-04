@@ -1,3 +1,155 @@
-.aj{
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:ital,wght@0,500;1,200&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: orange;
+    --background-color: #011625;
+
+}
+
+html {
+    font-size: 62.5%;
+    font-family: poppins;
+}
+a{
+    text-decoration: none;
+    color:white;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    flex-direction: row;
+    /* border: 2px solid orange; */
+    height: 8rem;
+    width: 100%;
+    margin-top: 3rem;
+}
+
+body {
+    background-color: var(--background-color);
+    overflow-y: hidden;
+}
+
+.HomePage {
+    height: 100vh;
+    width: 80%;
+    /* border: 2px solid black; */
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: poppins;
+    color: white;
+    font-size: 6rem;
+}
+
+.o {
+    color: orange;
+}
+
+button {
+    height: 5rem;
+    width: 15rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    transition: all .200s;
+    border: 2px solid white;
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    /* box-shadow: 0 0 2rem 0 white; */
+}
+
+button:hover {
+    height: 5rem;
+    width: 15rem;
+    box-shadow: 0 0 2rem 0 rgb(248, 197, 87);
+    border-radius: 1rem;
+    font-weight: bold;
+    background: linear-gradient(270deg, orange, yellow);
+    border: none;
+
+}
+
+.mainArea {
+    display: flex;
+    /* border: 2px solid orange; */
+    height: 80vh;
+    margin-top: 3.5rem;
+    width: 100%;
+    justify-content: space-around;
+
+}
+
+.TextHeading {
+    margin-bottom: 2rem;
+}
+
+.leftSide {
+    /* border: 2px solid orange; */
+    width: 40%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 2rem;
+    line-height: 5rem;
+    color: white;
+}
+
+.text {
+    font-size: 1.5rem;
+}
+
+.svg {
+    /* border: 2px solid orange; */
+    width: 40%;
+    /* height: 5rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: animate  8s infinite linear ;
+}
+@keyframes animate{
+    0%{
+        transform: translateY(-4rem);
+    }50%{
+        transform: translateY(4rem);
+    }100%{
+        transform: translateY(-4rem);
+    }
+}
+
+.svg img {
+    height: 45rem;
+    width: 45rem;
+}
+.s{
+    color: orange;
+}
+
+.blue {
+    color: rgb(41, 125, 203);
+    font-size: 5rem;
+}
+
+.s {
+    font-size: 5rem;
+}
+
+.leftSide .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    /* border: 2px solid orange; */
+    margin-top: 4rem;
+    margin-left: -8rem;
 }
