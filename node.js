@@ -13,7 +13,6 @@ const saltRounds = 10;
 require('dotenv').config();
 var jwt = require('jsonwebtoken');
 app.use(cookieParser());
-//const uri =  "mongodb+srv://aky11052003:Engineering@cluster0.axglx.mongodb.net/DevCreate?retryWrites=true&w=majority";
 
 try {
   mongoose.connect(
