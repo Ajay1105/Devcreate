@@ -83,7 +83,7 @@ app.post("/register", (req, res) => {
     });
     data.save();
   });
-  res.send("successful");
+  res.redirect('/stories');
 });
 
 app.post("/login", (req, res) => {
@@ -172,7 +172,7 @@ const ngoSchema = new mongoose.Schema({
                   httpOnly: true,
                 })
                 .status(200)
-                .json({ message: "Logged in successfully" });
+                .res.redirect('/stories');
               }catch(err){
                 res.send(err);
               }
@@ -221,7 +221,7 @@ app.post('/compose',(req,res)=>{
     story: stext,
   });
   data.save();
-  res.send("sucessful");
+  res.redirect('/stories');
 });
 
 // complaints
@@ -253,7 +253,7 @@ app.post('/complaint',(req,res)=>{
     complaint: complaint
   });
   data.save();
-  res.send("success");
+  res.redirect('/stories');
 });
 
 //complaint display
