@@ -19,10 +19,10 @@ Women Safety
 3.Aman pal DCH-8362
 4. Koushik Mondal DCH-8261
 
-The idea of our project is to ensure the women safty by creating a 3rd person who will register
+The idea of our project is to ensure the women safety by creating a 3rd person who will register
 the complain on the website on the behalf of vectim. 
 
-Secondly they are not contact ngo's because lack of contact between them.
+Secondly they are not able contact ngo's because lack of contacts between them.
 
 Our website will fill the communication gap between the people and the ngo.The user can register them self on the website and file a complain on the behalf of vectim.And ngo will
 ensure the privacy of the user.So the user can feel safe and secured dureing filing the complain.   

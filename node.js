@@ -73,10 +73,11 @@ app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/login.html");
 });
 
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
   const userName = req.body.username;
   const password = req.body.password;
-  bcrypt.hash(password, saltRounds, function (err, hash) {
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+   bcrypt.hash(password, saltRounds, function (err, hash) {
     const data = new User({
       email: userName,
       password: hash,
@@ -120,7 +121,7 @@ app.get("/logout", authorization, (req, res) => {
   return res
     .clearCookie("access_token")
     .status(200)
-    .json({ message: "Successfully logged out 😏 🍀" });
+    .res.redirect('/');
 });
 
 
@@ -187,7 +188,7 @@ app.get("/nlogout", authorization, (req, res) => {
     return res
       .clearCookie("naccess_token")
       .status(200)
-      .json({ message: "Successfully logged out 😏 🍀" });
+      .res.redirect('/');;
   });
 
 
